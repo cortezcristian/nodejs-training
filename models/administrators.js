@@ -1,8 +1,7 @@
-//var sequelize = require('sequelize-sqlite').sequelize
 var sequelize = module.parent.exports.dbConex
-  , Sequelize = require("sequelize")
+  , Sequelize = require('sequelize-sqlite').sequelize
   , crypto = require('crypto');
-  
+
 module.exports = sequelize.define('Administrators', {
 	username        : Sequelize.STRING,     
 	name            : Sequelize.STRING,

@@ -1,7 +1,7 @@
 var passport = require('passport')   
   , LocalStrategy = require('passport-local').Strategy
   , config = module.parent.exports.config
-  , dbConex = module.parent.exports.dbConex
+  , dbConex  = exports.dbConex = module.parent.exports.dbConex
   , Administrator = require('./models/administrators.js');
   
 passport.serializeUser(function(user, done) {

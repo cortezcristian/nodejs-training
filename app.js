@@ -51,7 +51,7 @@ if ('development' == app.get('env')) {
 /**
 * Passport Auth Strategy
 */
-//require('./authpassport');
+require('./authpassport');
 
 /**
 * Routes
