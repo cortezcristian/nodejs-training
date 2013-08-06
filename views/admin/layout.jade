@@ -1,0 +1,154 @@
+- var loggedIn = (typeof user != 'undefined') ? true : false;
+doctype 5
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width')
+
+    title= title
+    link(rel='stylesheet', href='/css/normalize.css')
+    link(rel='stylesheet', href='/css/foundation.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    script(src='js/vendor/custom.modernizr.js')
+    block scriptshead
+
+  body
+    // Nav Bar
+    nav.top-bar
+      ul.title-area
+          // Title Area 
+          li.name
+            h1
+              a(href='#') Employee Wiki 
+          // Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone 
+          li.toggle-topbar.menu-icon
+            a(href='#')
+              span Menu
+        section.top-bar-section
+          // Left Nav Section 
+          ul.left
+            li.divider
+            li.active
+              a(href='#') Main Item 1
+            li.divider
+            li
+              a(href='#') Main Item 2
+            li.divider
+            li.has-dropdown
+              a(href='#') Main Item 3
+              ul.dropdown
+                li.has-dropdown
+                  a(href='#') Dropdown Level 1a
+                  ul.dropdown
+                    li
+                      label Dropdown Level 2 Label
+                    li
+                      a(href='#') Dropdown Level 2a
+                    li
+                      a(href='#') Dropdown Level 2b
+                    li.has-dropdown
+                      a(href='#') Dropdown Level 2c
+                      ul.dropdown
+                        li
+                          label Dropdown Level 3 Label
+                        li
+                          a(href='#') Dropdown Level 3a
+                        li
+                          a(href='#') Dropdown Level 3b
+                        li.divider
+                        li
+                          a(href='#') Dropdown Level 3c
+                    li
+                      a(href='#') Dropdown Level 2d
+                    li
+                      a(href='#') Dropdown Level 2e
+                    li
+                      a(href='#') Dropdown Level 2f
+                li
+                  a(href='#') Dropdown Level 1b
+                li
+                  a(href='#') Dropdown Level 1c
+                li.divider
+                li
+                  a(href='#') Dropdown Level 1d
+                li
+                  a(href='#') Dropdown Level 1e
+                li
+                  a(href='#') Dropdown Level 1f
+                li.divider
+                li
+                  a(href='#') See all →
+            li.divider
+          // Right Nav Section 
+          ul.right
+            li.divider.hide-for-small
+            li.has-dropdown
+              a(href='#') Main Item 4
+              ul.dropdown
+                li
+                  label Dropdown Level 1 Label
+                li.has-dropdown
+                  a.(href='#') Dropdown Level 1a
+                  ul.dropdown
+                    li
+                      a(href='#') Dropdown Level 2a
+                    li
+                      a(href='#') Dropdown Level 2b
+                    li.has-dropdown
+                      a(href='#') Dropdown Level 2c
+                      ul.dropdown
+                        li
+                          a(href='#') Dropdown Level 3a
+                        li
+                          a(href='#') Dropdown Level 3b
+                        li
+                          a(href='#') Dropdown Level 3c
+                    li
+                      a(href='#') Dropdown Level 2d
+                    li
+                      a(href='#') Dropdown Level 2e
+                    li
+                      a(href='#') Dropdown Level 2f
+                li
+                  a(href='#') Dropdown Level 1b
+                li
+                  a(href='#') Dropdown Level 1c
+                li.divider
+                li
+                  label Dropdown Level 1 Label
+                li
+                  a(href='#') Dropdown Level 1d
+                li
+                  a(href='#') Dropdown Level 1e
+                li
+                  a(href='#') Dropdown Level 1f
+                li.divider
+                li
+                  a(href='#') See all →
+            li.divider
+            li.has-form
+              form
+                .row.collapse
+                  .small-8.columns
+                    input(type='text')
+                  .small-4.columns
+                    a.button(href='#') Search
+            li.divider.show-for-small
+            li.has-form
+              a.alert.button(href='/logout') Logout
+
+    // End Nav
+
+    block content
+
+    block scriptsfoot
+      script
+        document.write('<script src=' +
+        ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+            '.js><\/script>')
+      script(src='js/foundation.min.js')
+      script
+        $(document).foundation();
+
+

@@ -1,0 +1,16 @@
+{
+    "app": {
+        "domain" : "127.0.0.1",
+        "port": 3200
+    },
+    "session" : {
+        "secret" : "mybestsecret"
+    },
+    "db": {
+        "dialect" : "sqlite",
+        "domain" : "localhost",
+        "name" : "employeeWiki_dev",
+        "user" : "",
+        "pass" : ""
+    }
+}

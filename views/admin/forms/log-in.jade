@@ -1,0 +1,9 @@
+.row
+  .four.columns
+    form#logIn-form.panel(action="/admin", method="post")
+      h2 Login
+      label(for='email') E-mail
+      input#email(name='email', placeholder='E-mail', value='', type='text')
+      label(for='password') Password
+      input#pwd(name='password', placeholder='Password', value='', type='password')
+      input#send(type='submit', value='Log In')
