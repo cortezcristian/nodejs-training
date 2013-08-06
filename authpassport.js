@@ -25,8 +25,10 @@ passport.use('administrators', new LocalStrategy(
       }
       */
       if (!user.authenticate(password)) {
+        console.log("user auth failure");
         return done(null, false, { message: 'Incorrect password.' });
       }
+      console.log("user auth success");
       return done(null, user);
     });
   }

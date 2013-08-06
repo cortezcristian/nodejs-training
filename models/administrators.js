@@ -5,6 +5,7 @@ var sequelize = module.parent.exports.dbConex
 module.exports = sequelize.define('Administrators', {
 	username        : Sequelize.STRING,     
 	name            : Sequelize.STRING,
+	role            : Sequelize.STRING,
     email           : {
         type : Sequelize.STRING,
         validate: {isEmail: true},
@@ -14,17 +15,17 @@ module.exports = sequelize.define('Administrators', {
     },
     hashed_password : {
         type : Sequelize.STRING,
-        allowNull : false,
+        allowNull : false/*,
         set : function(v) {
             return crypto.createHash('md5').update(v).digest("hex");
-        }
+        }*/
     }
 },{
   classMethods: {
   },
   instanceMethods: {
     authenticate: function(password) {
-        return (this.hashed_password == crypto.createHash('md5').update(password).digest("hex"));
+        return (this.getDataValue('hashed_password') == crypto.createHash('md5').update(password).digest("hex"));
     }
   }
 });

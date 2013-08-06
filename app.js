@@ -9,6 +9,7 @@ var express = require('express')
   , flash = require('connect-flash')
   , passport = require('passport')
   , i18n = require('i18n')
+  , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
   , path = require('path')
   , utils = require('./utils')
@@ -39,6 +40,10 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser(config.session.secret));
 app.use(express.session());
+app.use(i18n.init);
+app.use(passport.initialize());
+app.use(passport.session())
+app.use(flash());
 app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
