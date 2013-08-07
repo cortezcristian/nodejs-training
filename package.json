@@ -12,6 +12,7 @@
     "passport": "*",
     "passport-local": "*",
     "i18n": "*",
+    "forms": "*",
     "sequelize": "*",
     "sequelize-sqlite": "*",
     "jade": "*",

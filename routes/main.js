@@ -1,4 +1,5 @@
 var app = module.parent.exports.app
+  , loginForm = require('../forms/login')
   , config = module.parent.exports.config;
 
 app.get('/', function(req, res){
@@ -10,7 +11,7 @@ app.get('/admin', function(req, res){
     if(typeof req.user != "undefined" && typeof req.user.role != "undefined" && req.user.role == "admin"){
         res.redirect('/panel');
     }else{
-        res.render('admin/index', { title: 'Admin Panel', section: 'Admin Panel' });
+        res.render('admin/index', { title: 'Admin Panel', section: 'Admin Panel', form : loginForm });
     }
 });
 

@@ -19,11 +19,9 @@ passport.use('administrators', new LocalStrategy(
   },
   function(username, password, done) {
     Administrator.find({ where : { email: username }}).success(function(user) {
-      /*
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      */
       if (!user.authenticate(password)) {
         console.log("user auth failure");
         return done(null, false, { message: 'Incorrect password.' });
