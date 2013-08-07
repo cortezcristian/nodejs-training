@@ -25,66 +25,50 @@ html
           li.toggle-topbar.menu-icon
             a(href='#')
               span Menu
+        - if(typeof user != "undefined") {
         section.top-bar-section
           // Left Nav Section 
           ul.left
             li.divider
             li.active
-              a(href='#') Main Item 1
-            li.divider
-            li
-              a(href='#') Main Item 2
+              a(href='/panel') Panel
             li.divider
             li.has-dropdown
-              a(href='#') Main Item 3
+              a(href='#') Administer
               ul.dropdown
                 li.has-dropdown
-                  a(href='#') Dropdown Level 1a
+                  a(href='#') Employess
                   ul.dropdown
                     li
-                      label Dropdown Level 2 Label
+                      label Operations
                     li
-                      a(href='#') Dropdown Level 2a
+                      a(href='/panel/employees/new') New Employee
                     li
-                      a(href='#') Dropdown Level 2b
-                    li.has-dropdown
-                      a(href='#') Dropdown Level 2c
-                      ul.dropdown
-                        li
-                          label Dropdown Level 3 Label
-                        li
-                          a(href='#') Dropdown Level 3a
-                        li
-                          a(href='#') Dropdown Level 3b
-                        li.divider
-                        li
-                          a(href='#') Dropdown Level 3c
-                    li
-                      a(href='#') Dropdown Level 2d
-                    li
-                      a(href='#') Dropdown Level 2e
-                    li
-                      a(href='#') Dropdown Level 2f
-                li
-                  a(href='#') Dropdown Level 1b
-                li
-                  a(href='#') Dropdown Level 1c
+                      a(href='#') List Employees
                 li.divider
                 li
-                  a(href='#') Dropdown Level 1d
+                  a(href='#') Offices
                 li
-                  a(href='#') Dropdown Level 1e
+                  a(href='#') Cities
                 li
-                  a(href='#') Dropdown Level 1f
+                  a(href='#') Countries
                 li.divider
                 li
                   a(href='#') See all →
             li.divider
           // Right Nav Section 
           ul.right
+            li.divider
+            li.has-form
+              form
+                .row.collapse
+                  .small-8.columns
+                    input(type='text')
+                  .small-4.columns
+                    a.button(href='#') Search
             li.divider.hide-for-small
             li.has-dropdown
-              a(href='#') Main Item 4
+              a(href='#') Configurations
               ul.dropdown
                 li
                   label Dropdown Level 1 Label
@@ -126,17 +110,10 @@ html
                 li.divider
                 li
                   a(href='#') See all →
-            li.divider
-            li.has-form
-              form
-                .row.collapse
-                  .small-8.columns
-                    input(type='text')
-                  .small-4.columns
-                    a.button(href='#') Search
             li.divider.show-for-small
             li.has-form
               a.alert.button(href='/logout') Logout
+        - }
 
     // End Nav
 
