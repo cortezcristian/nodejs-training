@@ -32,6 +32,23 @@ app.get('/panel', adminAuth, function(req, res){
 });
 
 app.get('/panel/employees/new', adminAuth, function(req, res){
-    res.render('admin/employees-new', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, form : creteEmployeeForm });
+    var formRes = req.flash('creteEmployeeForm'),
+        form = ( formRes.length > 0) ? formRes : creteEmployeeForm.toHTML();
+    res.render('admin/employees-new', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, form : form });
 });
 
+app.post('/panel/employees/new', adminAuth, function(req, res){
+   creteEmployeeForm.handle(req, {
+        success: function (form) {
+            res.redirect('panel/employees');
+        },
+        error: function (form) {
+            req.flash('creteEmployeeForm', form.toHTML());
+            res.redirect('panel/employees/new');
+        },
+        empty: function (form) {
+            req.flash('creteEmployeeForm', form.toHTML());
+            res.redirect('panel/employees/new');
+        }
+    }); 
+});

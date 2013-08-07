@@ -6,5 +6,5 @@ block content
     .four.columns
       form#logIn-form.panel(action="/panel/employees/new", method="post") 
         h2 New Employee
-        | !{form.toHTML()}
+        | !{form}
         input#send(type='submit', value='Save')

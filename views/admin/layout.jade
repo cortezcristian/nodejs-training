@@ -10,7 +10,7 @@ html
     link(rel='stylesheet', href='/css/foundation.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
 
-    script(src='js/vendor/custom.modernizr.js')
+    script(src='/js/vendor/custom.modernizr.js')
     block scriptshead
 
   body
@@ -122,9 +122,9 @@ html
     block scriptsfoot
       script
         document.write('<script src=' +
-        ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+        ('__proto__' in {} ? '/js/vendor/zepto' : '/js/vendor/jquery') +
             '.js><\/script>')
-      script(src='js/foundation.min.js')
+      script(src='/js/foundation.min.js')
       script
         $(document).foundation();
 
