@@ -2,8 +2,10 @@ var app = module.parent.exports.app
   , dbConex  = exports.dbConex = module.parent.exports.dbConex
   , loginForm = require('../forms/login')
   , creteEmployeeForm = require('../forms/creteEmployee')
+  , editEmployeeForm = require('../forms/editEmployee')
   , tableEmployees = require('../models/employees')
   , config = module.parent.exports.config
+  //, _ = require('underscore')
   , adminAuth;
 
 adminAuth = function(req, res, next){
@@ -33,7 +35,7 @@ app.get('/panel', adminAuth, function(req, res){
     res.render('admin/panel', { title: 'Admin Panel', section: 'Admin Panel', user: req.user });
 });
 
-app.get('/panel/employees', function(req, res){
+app.get('/panel/employees', adminAuth, function(req, res){
     tableEmployees.findAll().success(function(empList) {
       res.render('admin/employees', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, empList:empList });
     }); 
@@ -53,10 +55,26 @@ app.get('/panel/employees/delete/:id', adminAuth, function(req, res){
     }); 
 });
 
-app.get('/panel/employees/edit/:id', function(req, res){
-    var formRes = req.flash('creteEmployeeForm'),
-        form = ( formRes.length > 0) ? formRes : creteEmployeeForm.toHTML();
-    res.render('admin/employees-new', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, form : form });
+app.get('/panel/employees/edit/:id', adminAuth, function(req, res){
+    var formRes = req.flash('editEmployeeForm'),
+        form, formEdition = editEmployeeForm;
+        //formEdition = _.clone(creteEmployeeForm);
+        //formEdition = JSON.parse(JSON.stringify(creteEmployeeForm));
+        //delete formEdition.fields.password;
+        //delete formEdition.fields.confirm;
+        //console.log(formEdition);
+
+    if(formRes.length > 0){
+        //Bind Original Modified Data
+        form = formRes;
+        res.render('admin/employees-edit', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, form : form });
+    }else{
+        tableEmployees.find({idEmployee:req.params.id}).success(function(employee) {
+            //Bind Original Data
+            form = formEdition.bind(employee).toHTML();
+            res.render('admin/employees-edit', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, form : form });
+        }); 
+    }
 });
 
 app.post('/panel/employees/new', adminAuth, function(req, res){
@@ -78,6 +96,29 @@ app.post('/panel/employees/new', adminAuth, function(req, res){
         empty: function (form) {
             req.flash('creteEmployeeForm', form.toHTML());
             res.redirect('panel/employees/new');
+        }
+    }); 
+});
+
+
+app.post('/panel/employees/edit/:id', adminAuth, function(req, res){
+   creteEmployeeForm.handle(req, {
+        success: function (form) {
+          tableEmployees.update({
+             nombre: req.param('nombre'),
+             apellido: req.param('apellido'),
+             email: req.param('email')
+          },{idEmployee:req.params.id}).success(function(emp) {
+                res.redirect('panel/employees');
+          }).error(function(err) { console.log(err); });
+        },
+        error: function (form) {
+            req.flash('editEmployeeForm', form.toHTML());
+            res.redirect('panel/employees/edit/'+req.params.id);
+        },
+        empty: function (form) {
+            req.flash('editEmployeeForm', form.toHTML());
+            res.redirect('panel/employees/edit/'+req.params.id);
         }
     }); 
 });

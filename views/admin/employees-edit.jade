@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1.hide Admin Panel
+  .row
+    .four.columns
+      form#logIn-form.panel(action="", method="post") 
+        h2 Edit Employee
+        | !{form}
+        input#send(type='submit', value='Save')
