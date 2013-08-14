@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1.hide Admin Panel
+  .row
+    .four.columns
+      .panel
+        h2 Employee List
+        table
+          thead
+            tr
+              th Id
+              th Nombre
+              th Apellido
+              th E-Mail
+              th Options 
+          tbody
+          - empList.forEach(function(v,i){
+            tr
+              td #{v['idEmployee']}
+              td #{v['nombre']}
+              td #{v['apellido']}
+              td #{v['email']}
+              td
+                a(href="employees/edit/"+v['idEmployee']) Edit
+                |  | 
+                a(href="employees/delete/"+v['idEmployee']) Delete
+          - })
+          

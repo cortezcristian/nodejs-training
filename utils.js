@@ -5,7 +5,7 @@ var Sequelize = require('sequelize-sqlite').sequelize;
 
 exports.dbConnection = function(dbname, dbuser, dbpass, dbpath, dialect){
 
- return new Sequelize('database', 'username', 'password', {
+ return new Sequelize('database', '', '', {
        dialect: 'sqlite',
        storage: 'db/database.sqlite'
  });

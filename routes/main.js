@@ -1,6 +1,8 @@
 var app = module.parent.exports.app
+  , dbConex  = exports.dbConex = module.parent.exports.dbConex
   , loginForm = require('../forms/login')
   , creteEmployeeForm = require('../forms/creteEmployee')
+  , tableEmployees = require('../models/employees')
   , config = module.parent.exports.config
   , adminAuth;
 
@@ -31,6 +33,12 @@ app.get('/panel', adminAuth, function(req, res){
     res.render('admin/panel', { title: 'Admin Panel', section: 'Admin Panel', user: req.user });
 });
 
+app.get('/panel/employees', function(req, res){
+    tableEmployees.findAll().success(function(empList) {
+      res.render('admin/employees', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, empList:empList });
+    }); 
+});
+
 app.get('/panel/employees/new', adminAuth, function(req, res){
     var formRes = req.flash('creteEmployeeForm'),
         form = ( formRes.length > 0) ? formRes : creteEmployeeForm.toHTML();
@@ -40,7 +48,14 @@ app.get('/panel/employees/new', adminAuth, function(req, res){
 app.post('/panel/employees/new', adminAuth, function(req, res){
    creteEmployeeForm.handle(req, {
         success: function (form) {
-            res.redirect('panel/employees');
+          tableEmployees.create({
+             nombre: req.param('nombre'),
+             apellido: req.param('apellido'),
+             email: req.param('email'),
+             hashed_password: req.param('password')
+          }).success(function(emp) {
+                res.redirect('panel/employees');
+          }).error(function(err) { console.log(err); });
         },
         error: function (form) {
             req.flash('creteEmployeeForm', form.toHTML());

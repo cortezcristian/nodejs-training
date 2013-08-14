@@ -7,17 +7,21 @@ module.exports = forms.create({
         required: true,
         errorAfterField: true
     }),
-    username: fields.string({
+    apellido: fields.string({
         required: true,
         errorAfterField: true
-    }),
-    password: fields.password({required: true}),
-    confirm:  fields.password({
-        required: true,
-        validators: [validators.matchField('password')]
     }),
     email: fields.email({
         required: true, 
         errorAfterField: true 
+    }),
+    password: fields.password({
+        required: true,
+        errorAfterField: true
+    }),
+    confirm:  fields.password({
+        required: true,
+        errorAfterField: true,
+        validators: [validators.matchField('password')]
     })
 });
