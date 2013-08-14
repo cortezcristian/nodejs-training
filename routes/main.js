@@ -45,6 +45,20 @@ app.get('/panel/employees/new', adminAuth, function(req, res){
     res.render('admin/employees-new', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, form : form });
 });
 
+app.get('/panel/employees/delete/:id', adminAuth, function(req, res){
+    tableEmployees.find({idEmployee:req.params.id}).success(function(employee) {
+      employee.destroy().success(function() {
+        res.redirect('panel/employees');
+      }).error(function(err) { console.log(err); });
+    }); 
+});
+
+app.get('/panel/employees/edit/:id', function(req, res){
+    var formRes = req.flash('creteEmployeeForm'),
+        form = ( formRes.length > 0) ? formRes : creteEmployeeForm.toHTML();
+    res.render('admin/employees-new', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, form : form });
+});
+
 app.post('/panel/employees/new', adminAuth, function(req, res){
    creteEmployeeForm.handle(req, {
         success: function (form) {
