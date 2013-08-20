@@ -124,3 +124,10 @@ app.post('/panel/employees/edit/:id', adminAuth, function(req, res){
         }
     }); 
 });
+
+app.get('/employee/search/:keyword', function(req, res){
+    tableEmployees.findAll({where:["nombre LIKE ? OR apellido LIKE ?", "%"+req.params.keyword+"%", "%"+req.params.keyword+"%"]}).success(function(employees) {
+        var result = employees || [];
+        res.json(result);
+    });
+});
