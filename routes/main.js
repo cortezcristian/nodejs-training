@@ -65,11 +65,13 @@ app.get('/panel/employees/edit/:id', adminAuth, function(req, res){
         //console.log(formEdition);
 
     if(formRes.length > 0){
+        //console.log("r:",formRes);
         //Bind Original Modified Data
         form = formRes;
         res.render('admin/employees-edit', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, form : form });
     }else{
-        tableEmployees.find({idEmployee:req.params.id}).success(function(employee) {
+        //console.log("first:",formRes, req.params);
+        tableEmployees.find({where:{idEmployee:req.params.id}}).success(function(employee) {
             //Bind Original Data
             form = formEdition.bind(employee).toHTML();
             res.render('admin/employees-edit', { title: 'Admin Panel', section: 'Admin Panel', user: req.user, form : form });
@@ -102,7 +104,7 @@ app.post('/panel/employees/new', adminAuth, function(req, res){
 
 
 app.post('/panel/employees/edit/:id', adminAuth, function(req, res){
-   creteEmployeeForm.handle(req, {
+   editEmployeeForm.handle(req, {
         success: function (form) {
           tableEmployees.update({
              nombre: req.param('nombre'),
