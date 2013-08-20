@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1.center= title
+  p.center Welcome to #{title}
+  form
+    .row.collapse(style="padding: 0 10% 0 15%")
+      .small-9.columns
+        input#searchEmployeeKeyword(type='text')
+      .small-3.columns
+        a.button.small#searchEmployeeBtn(href='#',style="height: 29px;") Search
+  #search-results
