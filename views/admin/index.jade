@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  //include forms/log-in.jade
+  .row
+    .four.columns
+      form#logIn-form.panel(action="/admin", method="post") 
+        h2 Login
+        | !{form.toHTML()}
+        input#send(type='submit', value='Log In')
